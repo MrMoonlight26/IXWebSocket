@@ -51,12 +51,19 @@ project "ixwebsocket"
     filter "system:macosx"
         links { "pthread", "ssl", "crypto" }
          includedirs {
-            "/usr/local/opt/openssl@3/include",       -- Intel (x86_64)
-            "/opt/homebrew/opt/openssl@3/include"     -- Apple Silicon (arm64)
+            "/usr/local/opt/openssl/include", -- for INTEL chip
+            "/opt/homebrew/opt/openssl@3/include", -- for APPLE chip
+            "/usr/include",
+            "/usr/local/include",
+            "/usr/local/include/brotli",
+            "/opt/homebrew/include"
         }
         libdirs {
-            "/usr/local/opt/openssl@3/lib",           -- Intel
-            "/opt/homebrew/opt/openssl@3/lib"         -- Apple Silicon
+            "/usr/local/opt/openssl/lib", -- for INTEL chip
+            "/usr/local/lib", -- for INTEL chip
+            "/opt/homebrew/opt/openssl@3/lib", -- for APPLE chip
+            "/opt/homebrew/", -- for APPLE chip
+            "/opt/homebrew/lib"
         }
     filter "configurations:Debug"
         defines { "DEBUG" }
