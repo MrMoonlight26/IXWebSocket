@@ -50,7 +50,14 @@ project "ixwebsocket"
 
     filter "system:macosx"
         links { "pthread", "ssl", "crypto" }
-
+         includedirs {
+            "/usr/local/opt/openssl@3/include",       -- Intel (x86_64)
+            "/opt/homebrew/opt/openssl@3/include"     -- Apple Silicon (arm64)
+        }
+        libdirs {
+            "/usr/local/opt/openssl@3/lib",           -- Intel
+            "/opt/homebrew/opt/openssl@3/lib"         -- Apple Silicon
+        }
     filter "configurations:Debug"
         defines { "DEBUG" }
         symbols "On"
