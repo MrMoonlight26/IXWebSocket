@@ -49,13 +49,11 @@ project "ixwebsocket"
         links { "pthread", "ssl", "crypto" }
 
     filter "system:macosx"
-        links { "pthread", "ssl", "crypto" }
-         includedirs {
+        includedirs {
             "/usr/local/opt/openssl/include", -- for INTEL chip
             "/opt/homebrew/opt/openssl@3/include", -- for APPLE chip
             "/usr/include",
             "/usr/local/include",
-            "/usr/local/include/brotli",
             "/opt/homebrew/include"
         }
         libdirs {
@@ -65,10 +63,15 @@ project "ixwebsocket"
             "/opt/homebrew/", -- for APPLE chip
             "/opt/homebrew/lib"
         }
-    filter "configurations:Debug"
-        defines { "DEBUG" }
+        links { "pthread", "ssl", "crypto" }
+     filter "configurations:Debug"
+        runtime "Debug"
         symbols "On"
-
     filter "configurations:Release"
-        defines { "NDEBUG" }
+        runtime "Release"
         optimize "On"
+        symbols "On"
+    filter "configurations:Dist"
+        runtime "Release"
+        optimize "On"
+        symbols "Off"
